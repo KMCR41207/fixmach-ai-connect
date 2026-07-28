@@ -5,50 +5,50 @@ const columns = [
   {
     title: "Platform",
     items: [
-      { label: "AI Diagnosis", href: "#ai-diagnosis" },
-      { label: "Book a Repair", href: "#book" },
-      { label: "Live Tracking", href: "#how-it-works" },
-      { label: "Spare Parts", href: "#machines" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "API", href: "#faq" },
+      { label: "AI Diagnosis", href: "/diagnosis" },
+      { label: "Book a Repair", href: "/booking" },
+      { label: "How It Works", href: "/how-it-works" },
+      { label: "Machine Types", href: "/search" },
+      { label: "Search", href: "/search" },
+      { label: "Emergency", href: "/emergency" },
     ],
   },
   {
     title: "Resources",
     items: [
-      { label: "Blog", href: "#testimonials" },
-      { label: "Case Studies", href: "#testimonials" },
-      { label: "Documentation", href: "#faq" },
-      { label: "Support", href: "#faq" },
-      { label: "Status", href: "#faq" },
+      { label: "Contact Support", href: "/contact" },
+      { label: "Notifications", href: "/notifications" },
+      { label: "Reviews", href: "/reviews" },
+      { label: "Analytics", href: "/analytics" },
+      { label: "For Technicians", href: "/for-technicians" },
     ],
   },
   {
     title: "Technicians",
     items: [
-      { label: "Become a Technician", href: "#technicians" },
-      { label: "Certifications", href: "#technicians" },
-      { label: "Payouts", href: "#technicians" },
-      { label: "Leaderboard", href: "#technicians" },
+      { label: "Register as Technician", href: "/technician/register" },
+      { label: "Join Our Network", href: "/for-technicians" },
+      { label: "View Profiles", href: "/search" },
+      { label: "Earn More", href: "/for-technicians" },
     ],
   },
   {
     title: "Company",
     items: [
-      { label: "About", href: "#ai-diagnosis" },
-      { label: "Careers", href: "#book" },
-      { label: "Contact", href: "#book" },
-      { label: "Privacy", href: "#faq" },
-      { label: "Terms", href: "#faq" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Settings", href: "/settings" },
     ],
   },
 ];
 
 const socials = [
-  { label: "LinkedIn", href: "#technicians" },
-  { label: "YouTube", href: "#how-it-works" },
-  { label: "GitHub", href: "#ai-diagnosis" },
-  { label: "X", href: "#book" },
+  { label: "LinkedIn", href: "#" },
+  { label: "YouTube", href: "#" },
+  { label: "GitHub", href: "#" },
+  { label: "X", href: "#" },
 ];
 
 export function Footer() {

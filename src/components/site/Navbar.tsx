@@ -16,14 +16,14 @@ const industries = [
 ];
 
 const links = [
-  { label: "Solutions", href: "#ai-diagnosis" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Resources", href: "#faq" },
-  { label: "Case Studies", href: "#testimonials" },
-  { label: "Support", href: "#faq" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Search", href: "/search" },
+  { label: "For Technicians", href: "/for-technicians" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const mobileLinks = [{ label: "Industries", href: "#industries" }, ...links];
+const mobileLinks = [...links];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -45,12 +45,12 @@ export function Navbar() {
           className="hidden items-center gap-6 lg:flex"
           onMouseLeave={() => setMega(false)}
         >
-          <a
-            href="#ai-diagnosis"
+          <Link
+            to="/diagnosis"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Solutions
-          </a>
+          </Link>
           <button
             type="button"
             onMouseEnter={() => setMega(true)}
@@ -59,14 +59,14 @@ export function Navbar() {
           >
             Industries <ChevronDown className="size-3.5" />
           </button>
-          {links.slice(1).map((l) => (
-            <a
+          {links.map((l) => (
+            <Link
               key={l.label}
-              href={l.href}
+              to={l.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -128,22 +128,22 @@ export function Navbar() {
       {open && (
         <div className="mx-auto mt-2 w-[min(1200px,94%)] rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] lg:hidden">
           <nav className="flex flex-col gap-1">
-            {mobileLinks.map((l) => (
-              <a
+            {[{ label: "Solutions", href: "/diagnosis" }, ...mobileLinks].map((l) => (
+              <Link
                 key={l.label}
-                href={l.href}
+                to={l.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             <Link
-              to="/booking"
+              to="/technician/register"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-xl border border-border px-4 py-2.5 text-center text-sm font-semibold"
             >
-              Schedule Demo
+              Become Technician
             </Link>
             <Link
               to="/booking"
