@@ -3,7 +3,11 @@ import { Wrench } from "lucide-react";
 const columns = [
   {
     title: "Platform",
-    items: ["AI Diagnosis", "Book a Repair", "Live Tracking", "Spare Parts", "Pricing"],
+    items: ["AI Diagnosis", "Book a Repair", "Live Tracking", "Spare Parts", "Pricing", "API"],
+  },
+  {
+    title: "Resources",
+    items: ["Blog", "Case Studies", "Documentation", "Support", "Status"],
   },
   {
     title: "Technicians",
@@ -11,14 +15,16 @@ const columns = [
   },
   {
     title: "Company",
-    items: ["About", "Support", "Privacy Policy", "Terms"],
+    items: ["About", "Careers", "Contact", "Privacy", "Terms"],
   },
 ];
+
+const socials = ["LinkedIn", "YouTube", "GitHub", "X"];
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-secondary/40">
-      <div className="mx-auto grid w-[min(1200px,92%)] gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <div className="mx-auto grid w-[min(1200px,92%)] gap-10 py-14 md:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="flex size-9 items-center justify-center rounded-xl bg-[image:var(--gradient-accent)] text-primary-foreground">
@@ -30,6 +36,17 @@ export function Footer() {
             AI-powered industrial machinery diagnostics and verified technician dispatch — built to
             cut factory downtime from days to minutes.
           </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {socials.map((s) => (
+              <a
+                key={s}
+                href="#"
+                className="rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {s}
+              </a>
+            ))}
+          </div>
         </div>
 
         {columns.map((col) => (
