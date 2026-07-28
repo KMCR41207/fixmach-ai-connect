@@ -1,4 +1,5 @@
 import { ArrowRight, Check } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const plans = [
   {
@@ -71,8 +72,8 @@ export function Pricing() {
               </li>
             ))}
           </ul>
-          <a
-            href="#book"
+          <Link
+            to="/booking"
             className={`mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
               p.featured
                 ? "bg-[image:var(--gradient-accent)] text-primary-foreground"
@@ -81,7 +82,7 @@ export function Pricing() {
           >
             {p.name === "Enterprise" ? "Talk to sales" : "Get started"}
             <ArrowRight className="size-4" />
-          </a>
+          </Link>
         </article>
       ))}
     </div>

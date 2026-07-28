@@ -71,24 +71,24 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a
-            href="#technicians"
+          <Link
+            to="/auth/login"
             className="rounded-xl px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
           >
             Sign in
-          </a>
-          <a
-            href="#book"
+          </Link>
+          <Link
+            to="/booking"
             className="rounded-xl border border-border px-3.5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
           >
             Schedule Demo
-          </a>
-          <a
-            href="#book"
+          </Link>
+          <Link
+            to="/booking"
             className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
           >
             Book Repair
-          </a>
+          </Link>
         </div>
 
         <button
@@ -138,20 +138,20 @@ export function Navbar() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#book"
+            <Link
+              to="/booking"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-xl border border-border px-4 py-2.5 text-center text-sm font-semibold"
             >
               Schedule Demo
-            </a>
-            <a
-              href="#book"
+            </Link>
+            <Link
+              to="/booking"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground"
             >
               Book Repair
-            </a>
+            </Link>
           </nav>
         </div>
       )}

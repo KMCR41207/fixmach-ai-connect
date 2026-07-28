@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Activity,
   ArrowRight,
@@ -192,30 +192,30 @@ function Landing() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#book"
+              <Link
+                to="/booking"
                 className="inline-flex items-center gap-2 rounded-xl bg-[image:var(--gradient-ember)] px-5 py-3 text-sm font-semibold text-ember-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
               >
                 Book Repair <ArrowRight className="size-4" />
-              </a>
-              <a
-                href="#ai-diagnosis"
+              </Link>
+              <Link
+                to="/diagnosis"
                 className="inline-flex items-center gap-2 rounded-xl bg-background px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5"
               >
                 <Bot className="size-4" /> AI Diagnosis
-              </a>
+              </Link>
               <a
-                href="#book"
+                href="#"
                 className="glass-panel inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-white/20"
               >
                 <PlayCircle className="size-4" /> Schedule Demo
               </a>
-              <a
-                href="#technicians"
+              <Link
+                to="/technician/register"
                 className="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-primary-foreground/85 transition-colors hover:text-primary-foreground"
               >
                 Become Technician
-              </a>
+              </Link>
             </div>
 
             <dl className="mt-8 grid max-w-xl gap-3 sm:grid-cols-3">
@@ -438,18 +438,18 @@ function Landing() {
             Register your plant, add your machines, and keep a verified technician one tap away.
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="#ai-diagnosis"
+            <Link
+              to="/diagnosis"
               className="inline-flex items-center gap-2 rounded-xl bg-[image:var(--gradient-accent)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
             >
               Start free AI diagnosis <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="#pricing"
+            </Link>
+            <Link
+              to="/booking"
               className="inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-secondary"
             >
               Schedule a demo
-            </a>
+            </Link>
           </div>
           <p className="relative mt-6 inline-flex items-center gap-2 text-xs text-muted-foreground">
             <CheckCircle2 className="size-4 text-primary" /> No card required · Escrow-protected
@@ -460,12 +460,12 @@ function Landing() {
 
       <Footer />
 
-      <a
-        href="#book"
+      <Link
+        to="/booking"
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-2xl bg-[image:var(--gradient-ember)] px-5 py-3 text-sm font-semibold text-ember-foreground shadow-[var(--shadow-glow)] animate-pulse-ring transition-transform hover:-translate-y-0.5"
       >
         <Wrench className="size-4" /> Book Repair
-      </a>
+      </Link>
     </div>
   );
 }

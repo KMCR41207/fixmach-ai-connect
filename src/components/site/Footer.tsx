@@ -1,4 +1,5 @@
 import { Wrench } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const columns = [
   {
@@ -67,13 +68,13 @@ export function Footer() {
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {socials.map((s) => (
-              <a
+              <Link
                 key={s.label}
-                href={s.href}
+                to={s.href}
                 className="rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {s.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -84,12 +85,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {col.items.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
