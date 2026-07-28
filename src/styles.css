@@ -120,6 +120,7 @@
   --gradient-ember: linear-gradient(120deg, oklch(0.72 0.17 52), oklch(0.66 0.19 32));
   --shadow-card: 0 1px 2px oklch(0.21 0.035 256 / 0.05), 0 12px 32px -14px oklch(0.21 0.035 256 / 0.28);
   --shadow-glow: 0 24px 60px -24px oklch(0.46 0.16 258 / 0.55);
+  --gradient-scan: linear-gradient(90deg, transparent, oklch(0.6 0.14 232 / 0.28), transparent);
   --glass: oklch(1 0 0 / 0.1);
   --glass-border: oklch(1 0 0 / 0.18);
 }
@@ -216,8 +217,39 @@
   70% { box-shadow: 0 0 0 18px oklch(0.7 0.17 52 / 0); }
   100% { box-shadow: 0 0 0 0 oklch(0.7 0.17 52 / 0); }
 }
+@keyframes scan-x {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(900%); }
+}
+@keyframes scan-y {
+  0%, 100% { transform: translateY(-10%); opacity: 0; }
+  50% { transform: translateY(110%); opacity: 1; }
+}
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  15% { opacity: 0.8; }
+  100% { transform: translate3d(24px, -160px, 0); opacity: 0; }
+}
 
 @utility animate-float-slow { animation: float-slow 14s ease-in-out infinite; }
 @utility animate-rise-in { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @utility animate-spin-gear { animation: spin-gear 22s linear infinite; }
 @utility animate-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
+@utility animate-scan-x { animation: scan-x 2.6s linear infinite; }
+@utility animate-scan-y { animation: scan-y 7s ease-in-out infinite; }
+@utility animate-drift { animation: drift 11s linear infinite; }
+
+@utility blueprint-grid {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.07) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+

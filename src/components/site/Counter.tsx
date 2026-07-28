@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react";
 
 export function Counter({
   to,
+  prefix = "",
   suffix = "",
+  decimals = 0,
   duration = 1600,
 }: {
   to: number;
+  prefix?: string;
   suffix?: string;
+  decimals?: number;
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -25,7 +29,7 @@ export function Counter({
         const tick = (now: number) => {
           const p = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - p, 3);
-          setValue(Math.round(to * eased));
+          setValue(to * eased);
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -39,7 +43,11 @@ export function Counter({
 
   return (
     <span ref={ref}>
-      {value.toLocaleString()}
+      {prefix}
+      {value.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}
       {suffix}
     </span>
   );
