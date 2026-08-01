@@ -221,9 +221,16 @@ export function DiagnosisFlow() {
 
       {/* Pipeline */}
       <div className="surface-card p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-          Diagnosis pipeline
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            Diagnosis pipeline
+          </p>
+          {step >= 0 && (
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+              {Math.min(step + 1, pipeline.length)}/{pipeline.length}
+            </span>
+          )}
+        </div>
         {step === pipeline.length - 1 && !running && (
           <div className="mt-3 flex items-center gap-2 rounded-xl border border-green-500/30 bg-green-50 px-3 py-2 text-xs font-semibold text-green-700 dark:bg-green-950/30 dark:text-green-400">
             <CheckCircle2 className="size-4" />
