@@ -75,13 +75,22 @@ export function DiagnosisFlow() {
     }, 750);
   };
 
+  const [error, setError] = useState<string | null>(null);
+  const MAX_MB = 20;
+
+  const validateAndRun = (file: File) => {
+    setError(null);
+    if (file.size > MAX_MB * 1024 * 1024) {
+      setError(`File too large. Max ${MAX_MB} MB allowed.`);
+      return;
+    }
+    setFileName(file.name);
+    runDiagnosis();
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setFileName(file.name);
-      runDiagnosis();
-    }
-    // reset so same file can be re-selected
+    if (file) validateAndRun(file);
     e.target.value = "";
   };
 
@@ -89,16 +98,14 @@ export function DiagnosisFlow() {
     e.preventDefault();
     setDragging(false);
     const file = e.dataTransfer.files?.[0];
-    if (file) {
-      setFileName(file.name);
-      runDiagnosis();
-    }
+    if (file) validateAndRun(file);
   };
 
   const resetDiagnosis = () => {
     setStep(-1);
     setFileName(null);
     setRunning(false);
+    setError(null);
   };
 
   const handleModeSelect = (i: number) => {
@@ -176,6 +183,9 @@ export function DiagnosisFlow() {
               : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
+          {error && (
+            <p role="alert" className="mt-2 text-xs font-medium text-red-500">{error}</p>
+          )}
 
           <div className="mt-4 flex gap-2">
             <button
