@@ -119,6 +119,7 @@ export function DiagnosisFlow() {
   };
 
   return (
+    <section aria-label="AI diagnosis demo">
     <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
       <div className="surface-card p-6">
         {/* Hidden file input — accept type changes with mode */}
@@ -196,7 +197,6 @@ export function DiagnosisFlow() {
             {fileName
               ? `Selected: ${fileName}`
               : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
-          </p>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
           {error && (
@@ -302,5 +302,6 @@ export function DiagnosisFlow() {
         </ol>
       </div>
     </div>
+    </section>
   );
 }
