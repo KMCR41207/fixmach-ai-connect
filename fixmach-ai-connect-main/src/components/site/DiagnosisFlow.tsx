@@ -152,11 +152,17 @@ export function DiagnosisFlow() {
 
         {/* Progress bar */}
         {running && (
-          <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-            <div
-              className="h-full rounded-full bg-[image:var(--gradient-accent)] transition-all duration-500"
-              style={{ width: `${((step + 1) / pipeline.length) * 100}%` }}
-            />
+          <div className="mt-3">
+            <div className="mb-1 flex items-center justify-between text-xs text-muted-foreground">
+              <span>Step {step + 1} of {pipeline.length} · {pipeline[step]?.label}…</span>
+              <span>{Math.round(((step + 1) / pipeline.length) * 100)}%</span>
+            </div>
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+              <div
+                className="h-full rounded-full bg-[image:var(--gradient-accent)] transition-all duration-500"
+                style={{ width: `${((step + 1) / pipeline.length) * 100}%` }}
+              />
+            </div>
           </div>
         )}
 
