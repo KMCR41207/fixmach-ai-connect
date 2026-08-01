@@ -137,6 +137,7 @@ export function DiagnosisFlow() {
             <button
               key={m.label}
               type="button"
+              title={m.hint}
               onClick={() => handleModeSelect(i)}
               className={`rounded-xl border p-3 text-left transition-all ${
                 mode === i
