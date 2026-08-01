@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import {
-  AudioLines,
   Bot,
   CheckCircle2,
   FileText,
@@ -8,6 +7,7 @@ import {
   IndianRupee,
   ImageIcon,
   Loader2,
+  MessageSquare,
   ScanText,
   UploadCloud,
   UserCheck,
@@ -19,24 +19,28 @@ const uploadModes = [
     label: "Machine photo",
     hint: "JPG, PNG up to 20 MB",
     accept: "image/jpeg,image/png",
+    type: "file",
   },
   {
     icon: ScanText,
     label: "Error code screen",
     hint: "OCR reads HMI screenshots",
     accept: "image/*",
+    type: "file",
   },
   {
-    icon: AudioLines,
-    label: "Machine sound",
-    hint: "WAV, M4A abnormal noise",
-    accept: "audio/wav,audio/x-m4a,audio/*",
+    icon: MessageSquare,
+    label: "Describe problem",
+    hint: "Type your issue in detail",
+    accept: "",
+    type: "text",
   },
   {
     icon: FileText,
     label: "Maintenance log",
     hint: "PDF, CSV service history",
     accept: ".pdf,.csv,application/pdf,text/csv",
+    type: "file",
   },
 ];
 
@@ -56,6 +60,8 @@ export function DiagnosisFlow() {
   const [running, setRunning] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const runDiagnosis = () => {
@@ -75,7 +81,6 @@ export function DiagnosisFlow() {
     }, 750);
   };
 
-  const [error, setError] = useState<string | null>(null);
   const MAX_MB = 20;
 
   const validateAndRun = (file: File) => {
@@ -104,6 +109,7 @@ export function DiagnosisFlow() {
   const resetDiagnosis = () => {
     setStep(-1);
     setFileName(null);
+    setDescription("");
     setRunning(false);
     setError(null);
   };
@@ -116,6 +122,15 @@ export function DiagnosisFlow() {
   const openFilePicker = () => {
     if (running) return;
     fileInputRef.current?.click();
+  };
+
+  const handleTextRun = () => {
+    setError(null);
+    if (!description.trim()) {
+      setError("Please describe the problem before running diagnosis.");
+      return;
+    }
+    runDiagnosis();
   };
 
   return (
@@ -171,7 +186,42 @@ export function DiagnosisFlow() {
           </div>
         )}
 
-        {/* Drop zone */}
+        {/* Drop zone / Text input */}
+        {uploadModes[mode].type === "text" ? (
+          <div className="mt-4 rounded-2xl border border-border bg-secondary/40 p-4">
+            {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-6 text-primary mb-2" />; })()}
+            <textarea
+              rows={4}
+              placeholder="e.g. Machine vibrating heavily at startup, unusual grinding noise from spindle area…"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              disabled={running}
+              className="w-full resize-none rounded-xl border border-border bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60"
+            />
+            {error && (
+              <p role="alert" className="mt-1 text-xs font-medium text-red-500">{error}</p>
+            )}
+            <div className="mt-3 flex gap-2">
+              <button
+                type="button"
+                disabled={running || !description.trim()}
+                onClick={handleTextRun}
+                className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {running ? "Analysing…" : "Run demo diagnosis"}
+              </button>
+              {step === pipeline.length - 1 && (
+                <button
+                  type="button"
+                  onClick={resetDiagnosis}
+                  className="rounded-xl border border-border px-4 py-2 text-xs font-semibold transition-colors hover:bg-accent"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
         <div
           onDragOver={(e) => {
             e.preventDefault();
@@ -223,6 +273,7 @@ export function DiagnosisFlow() {
             )}
           </div>
         </div>
+        )}
       </div>
 
       {/* Pipeline */}
