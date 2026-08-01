@@ -181,8 +181,8 @@ export function DiagnosisFlow() {
           tabIndex={0}
           aria-label={`Upload area for ${uploadModes[mode].label}. Click or drag and drop a file.`}
           onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openFilePicker()}
-          className={`mt-4 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            dragging ? "border-primary bg-accent" : "border-border bg-secondary/40 hover:border-primary/50"
+          className={`relative mt-4 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            dragging ? "border-primary bg-accent scale-[1.01]" : "border-border bg-secondary/40 hover:border-primary/50"
           }`}
         >
           {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
