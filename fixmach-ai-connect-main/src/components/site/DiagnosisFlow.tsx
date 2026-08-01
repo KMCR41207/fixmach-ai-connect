@@ -206,11 +206,14 @@ export function DiagnosisFlow() {
         <ol className="mt-5 space-y-2">
           {pipeline.map((p, i) => {
             const done = step >= i;
+            const active = step === i && running;
             return (
               <li
                 key={p.label}
                 className={`flex items-start gap-3 rounded-xl border p-3 transition-all duration-500 ${
-                  done
+                  active
+                    ? "border-primary bg-accent opacity-100 shadow-sm"
+                    : done
                     ? "border-primary/30 bg-accent/50 opacity-100"
                     : "border-border bg-card opacity-45"
                 }`}
