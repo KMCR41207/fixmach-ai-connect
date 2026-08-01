@@ -224,10 +224,13 @@ export function DiagnosisFlow() {
                 >
                   <p.icon className="size-4" />
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold">{p.label}</p>
                   <p className="text-xs text-muted-foreground">{done ? p.detail : "Waiting…"}</p>
                 </div>
+                {done && (
+                  <CheckCircle2 className="ml-auto size-4 shrink-0 text-primary" />
+                )}
               </li>
             );
           })}
