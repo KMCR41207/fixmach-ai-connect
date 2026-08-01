@@ -182,11 +182,12 @@ export function DiagnosisFlow() {
             dragging ? "border-primary bg-accent" : "border-border bg-secondary/40 hover:border-primary/50"
           }`}
         >
-          <UploadCloud className="size-7 text-primary" />
+          {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
           <p className="mt-3 text-sm font-semibold">
             {fileName
               ? `Selected: ${fileName}`
               : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
+          </p>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
           {error && (
