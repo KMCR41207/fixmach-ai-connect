@@ -227,6 +227,14 @@ export function DiagnosisFlow() {
             Diagnosis complete — technician dispatched
           </div>
         )}
+        {step === pipeline.length - 1 && !running && (
+          <button
+            type="button"
+            className="mt-3 w-full rounded-xl bg-[image:var(--gradient-accent)] py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Book Repair Now
+          </button>
+        )}
         <ol className="mt-5 space-y-2">
           {pipeline.map((p, i) => {
             const done = step >= i;
