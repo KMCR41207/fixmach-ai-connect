@@ -226,6 +226,14 @@ export function DiagnosisFlow() {
 
       {/* Pipeline */}
       <div className="surface-card p-6">
+        {/* Screen reader live region */}
+        <p aria-live="polite" aria-atomic="true" className="sr-only">
+          {running
+            ? `Step ${step + 1} of ${pipeline.length}: ${pipeline[step]?.label}`
+            : step === pipeline.length - 1
+            ? "Diagnosis complete. Technician dispatched."
+            : ""}
+        </p>
         <div className="flex items-center justify-between">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             Diagnosis pipeline
