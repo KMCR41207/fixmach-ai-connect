@@ -7,6 +7,7 @@ import {
   Gauge,
   IndianRupee,
   ImageIcon,
+  Loader2,
   ScanText,
   UploadCloud,
   UserCheck,
@@ -225,7 +226,11 @@ export function DiagnosisFlow() {
                       : "bg-secondary text-muted-foreground"
                   }`}
                 >
-                  <p.icon className="size-4" />
+                  {active ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <p.icon className="size-4" />
+                  )}
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold">{p.label}</p>
