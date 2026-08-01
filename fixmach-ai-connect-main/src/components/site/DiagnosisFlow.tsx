@@ -94,11 +94,15 @@ export function DiagnosisFlow() {
     }
   };
 
-  const handleModeSelect = (i: number) => {
-    setMode(i);
-    // reset pipeline when switching modes
+  const resetDiagnosis = () => {
     setStep(-1);
     setFileName(null);
+    setRunning(false);
+  };
+
+  const handleModeSelect = (i: number) => {
+    setMode(i);
+    resetDiagnosis();
   };
 
   const openFilePicker = () => {
@@ -158,14 +162,25 @@ export function DiagnosisFlow() {
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
 
-          <button
-            type="button"
-            disabled={running}
-            onClick={openFilePicker}
-            className="mt-4 rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {running ? "Analysing…" : "Run demo diagnosis"}
-          </button>
+          <div className="mt-4 flex gap-2">
+            <button
+              type="button"
+              disabled={running}
+              onClick={openFilePicker}
+              className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {running ? "Analysing…" : "Run demo diagnosis"}
+            </button>
+            {step === pipeline.length - 1 && (
+              <button
+                type="button"
+                onClick={resetDiagnosis}
+                className="rounded-xl border border-border px-4 py-2 text-xs font-semibold transition-colors hover:bg-accent"
+              >
+                Reset
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
