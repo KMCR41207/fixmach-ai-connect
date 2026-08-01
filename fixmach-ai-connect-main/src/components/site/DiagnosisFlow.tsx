@@ -257,7 +257,7 @@ export function DiagnosisFlow() {
                     ? "border-primary bg-accent opacity-100 shadow-sm"
                     : done
                     ? "border-primary/30 bg-accent/50 opacity-100"
-                    : "border-border bg-card opacity-45"
+                    : "border-border bg-card opacity-40"
                 }`}
               >
                 <span
@@ -275,7 +275,9 @@ export function DiagnosisFlow() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold">{p.label}</p>
-                  <p className="text-xs text-muted-foreground">{done ? p.detail : "Waiting…"}</p>
+                  <p className={`text-xs text-muted-foreground ${!done && running ? "animate-pulse" : ""}`}>
+                    {done ? p.detail : running ? "Processing…" : "Waiting…"}
+                  </p>
                 </div>
                 {done && (
                   <CheckCircle2 className="ml-auto size-4 shrink-0 text-primary" />
