@@ -146,6 +146,9 @@ export function DiagnosisFlow() {
             >
               <m.icon className="size-4.5" />
               <p className="mt-2 text-xs font-semibold leading-tight">{m.label}</p>
+              {mode === i && (
+                <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{m.hint}</p>
+              )}
             </button>
           ))}
         </div>
