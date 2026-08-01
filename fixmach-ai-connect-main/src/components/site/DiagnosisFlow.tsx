@@ -142,6 +142,16 @@ export function DiagnosisFlow() {
           ))}
         </div>
 
+        {/* Progress bar */}
+        {running && (
+          <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+            <div
+              className="h-full rounded-full bg-[image:var(--gradient-accent)] transition-all duration-500"
+              style={{ width: `${((step + 1) / pipeline.length) * 100}%` }}
+            />
+          </div>
+        )}
+
         {/* Drop zone */}
         <div
           onDragOver={(e) => {
