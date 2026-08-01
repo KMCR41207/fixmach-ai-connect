@@ -185,6 +185,11 @@ export function DiagnosisFlow() {
             dragging ? "border-primary bg-accent scale-[1.01]" : "border-border bg-secondary/40 hover:border-primary/50"
           }`}
         >
+          {dragging && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-primary/10">
+              <p className="text-sm font-bold text-primary">Drop to analyse</p>
+            </div>
+          )}
           {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
           <p className="mt-3 text-sm font-semibold">
             {fileName
