@@ -171,8 +171,12 @@ export function DiagnosisFlow() {
   };
 
   const handleModeSelect = (i: number) => {
+    if (i === mode) return; // already on this mode, do nothing
     setMode(i);
-    resetDiagnosis();
+    // only reset the upload state, not the pipeline results
+    setFileName(null);
+    setDescription("");
+    setError(null);
   };
 
   const openFilePicker = () => {
