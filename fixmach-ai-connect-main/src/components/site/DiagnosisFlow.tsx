@@ -64,6 +64,7 @@ export function DiagnosisFlow() {
   const [error, setError] = useState<string | null>(null);
   const [pipeline, setPipeline] = useState(defaultPipeline);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pendingFile = useRef<File | null>(null);
 
   const runDiagnosis = () => {
     if (running) return;
@@ -151,7 +152,15 @@ export function DiagnosisFlow() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) validateAndRun(file);
+    if (file) {
+      setError(null);
+      if (file.size > MAX_MB * 1024 * 1024) {
+        setError(`File too large. Max ${MAX_MB} MB allowed.`);
+      } else {
+        pendingFile.current = file;
+        setFileName(file.name);
+      }
+    }
     e.target.value = "";
   };
 
@@ -159,7 +168,15 @@ export function DiagnosisFlow() {
     e.preventDefault();
     setDragging(false);
     const file = e.dataTransfer.files?.[0];
-    if (file) validateAndRun(file);
+    if (file) {
+      setError(null);
+      if (file.size > MAX_MB * 1024 * 1024) {
+        setError(`File too large. Max ${MAX_MB} MB allowed.`);
+      } else {
+        pendingFile.current = file;
+        setFileName(file.name);
+      }
+    }
   };
 
   const resetDiagnosis = () => {
@@ -168,6 +185,7 @@ export function DiagnosisFlow() {
     setDescription("");
     setRunning(false);
     setError(null);
+    pendingFile.current = null;
   };
 
   const handleModeSelect = (i: number) => {
@@ -268,7 +286,7 @@ export function DiagnosisFlow() {
                 onClick={handleTextRun}
                 className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {running ? "Analysing…" : "Run demo diagnosis"}
+                {running ? "Analysing…" : "Run diagnosis"}
               </button>
               {step === pipeline.length - 1 && (
                 <button
@@ -282,57 +300,69 @@ export function DiagnosisFlow() {
             </div>
           </div>
         ) : (
-        <div
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragging(true);
-          }}
-          onDragLeave={() => setDragging(false)}
-          onDrop={handleDrop}
-          role="button"
-          tabIndex={0}
-          aria-label={`Upload area for ${uploadModes[mode].label}. Click or drag and drop a file.`}
-          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openFilePicker()}
-          className={`relative mt-4 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            dragging ? "border-primary bg-accent scale-[1.01]" : "border-border bg-secondary/40 hover:border-primary/50"
-          }`}
-        >
-          {dragging && (
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-primary/10">
-              <p className="text-sm font-bold text-primary">Drop to analyse</p>
-            </div>
-          )}
-          {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
-          <p className="mt-3 text-sm font-semibold">
-            {fileName
-              ? `Selected: ${fileName}`
-              : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
-          </p>
-          <p className="mt-1 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
-          {error && (
-            <p role="alert" className="mt-2 text-xs font-medium text-red-500">{error}</p>
-          )}
+          <div
+            onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={handleDrop}
+            className={`relative mt-4 rounded-2xl border-2 border-dashed px-6 py-8 text-center transition-all ${
+              dragging ? "border-primary bg-accent scale-[1.01]" : "border-border bg-secondary/40"
+            }`}
+          >
+            {dragging && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-primary/10">
+                <p className="text-sm font-bold text-primary">Drop to upload</p>
+              </div>
+            )}
 
-          <div className="mt-4 flex gap-2">
-            <button
-              type="button"
-              disabled={running}
-              onClick={openFilePicker}
-              className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {running ? "Analysing…" : "Run demo diagnosis"}
-            </button>
-            {step === pipeline.length - 1 && (
+            {/* Icon + label */}
+            <div className="flex flex-col items-center">
+              {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
+              <p className="mt-2 text-sm font-semibold">
+                {fileName ? `📎 ${fileName}` : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
+            </div>
+
+            {error && (
+              <p role="alert" className="mt-2 text-xs font-medium text-red-500">{error}</p>
+            )}
+
+            {/* Two separate buttons */}
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {/* Upload button — only opens file picker */}
               <button
                 type="button"
-                onClick={resetDiagnosis}
-                className="rounded-xl border border-border px-4 py-2 text-xs font-semibold transition-colors hover:bg-accent"
+                disabled={running}
+                onClick={openFilePicker}
+                className="rounded-xl border border-primary px-4 py-2 text-xs font-semibold text-primary transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Reset
+                {fileName ? "Change file" : "Choose file"}
               </button>
-            )}
+
+              {/* Run button — only active after file is selected */}
+              <button
+                type="button"
+                disabled={running || !fileName}
+                onClick={() => {
+                  // Re-use stored file ref for diagnosis
+                  if (pendingFile.current) validateAndRun(pendingFile.current);
+                }}
+                className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {running ? "Analysing…" : "Run diagnosis"}
+              </button>
+
+              {step === pipeline.length - 1 && !running && (
+                <button
+                  type="button"
+                  onClick={resetDiagnosis}
+                  className="rounded-xl border border-border px-4 py-2 text-xs font-semibold transition-colors hover:bg-accent"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
-        </div>
         )}
       </div>
 
