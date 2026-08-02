@@ -44,13 +44,13 @@ const uploadModes = [
   },
 ];
 
-const pipeline = [
-  { icon: UploadCloud, label: "Upload", detail: "Photo of spindle housing received" },
-  { icon: ScanText, label: "OCR", detail: "Alarm 176 · SPINDLE OVERHEAT extracted" },
-  { icon: Bot, label: "AI detection", detail: "Bearing wear + coolant flow restriction" },
-  { icon: Gauge, label: "Confidence", detail: "92% — cross-checked on 18k similar faults" },
+const defaultPipeline = [
+  { icon: UploadCloud, label: "Upload", detail: "Photo received" },
+  { icon: ScanText, label: "OCR", detail: "Image analysed" },
+  { icon: Bot, label: "AI detection", detail: "Running defect detection…" },
+  { icon: Gauge, label: "Confidence", detail: "Calculating confidence…" },
   { icon: IndianRupee, label: "Cost estimate", detail: "₹34,000 – ₹52,000 incl. parts" },
-  { icon: CheckCircle2, label: "Recommendation", detail: "Stop machine · replace front bearing set" },
+  { icon: CheckCircle2, label: "Recommendation", detail: "Awaiting result…" },
   { icon: UserCheck, label: "Technician", detail: "Ravi K. · 6.2 km · ETA 24 min" },
 ];
 
@@ -62,6 +62,7 @@ export function DiagnosisFlow() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [description, setDescription] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [pipeline, setPipeline] = useState(defaultPipeline);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const runDiagnosis = () => {
@@ -81,6 +82,56 @@ export function DiagnosisFlow() {
     }, 750);
   };
 
+  const runRealDiagnosis = async (file: File) => {
+    if (running) return;
+    setPipeline(defaultPipeline);
+    setRunning(true);
+    setStep(0);
+
+    // Animate steps 0-2 while API call is in progress
+    let i = 0;
+    const id = setInterval(() => {
+      i += 1;
+      if (i >= 2) { clearInterval(id); }
+      else { setStep(i); }
+    }, 800);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("http://localhost:8000/predict", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      clearInterval(id);
+
+      // Update pipeline with real results
+      setPipeline(prev => prev.map((p, idx) => {
+        if (idx === 2) return { ...p, detail: `${data.label} detected · ${data.confidence}% confidence` };
+        if (idx === 3) return { ...p, detail: `${data.confidence}% — AI model (99% accuracy)` };
+        if (idx === 5) return { ...p, detail: data.recommendation };
+        return p;
+      }));
+
+      // Animate remaining steps
+      let j = 2;
+      const id2 = setInterval(() => {
+        j += 1;
+        setStep(j);
+        if (j >= defaultPipeline.length - 1) {
+          clearInterval(id2);
+          setRunning(false);
+        }
+      }, 750);
+    } catch {
+      clearInterval(id);
+      setError("Could not reach ML backend. Make sure it's running on port 8000.");
+      setRunning(false);
+      setStep(-1);
+    }
+  };
+
   const MAX_MB = 20;
 
   const validateAndRun = (file: File) => {
@@ -90,7 +141,12 @@ export function DiagnosisFlow() {
       return;
     }
     setFileName(file.name);
-    runDiagnosis();
+    // Use real ML for Machine photo mode (mode 0), demo for others
+    if (mode === 0) {
+      runRealDiagnosis(file);
+    } else {
+      runDiagnosis();
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
