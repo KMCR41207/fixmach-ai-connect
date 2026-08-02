@@ -191,13 +191,6 @@ export function DiagnosisFlow() {
   const handleModeSelect = (i: number) => {
     if (i === mode) return;
     setMode(i);
-    setError(null);
-    // only clear file if switching between file and text modes
-    if (uploadModes[i].type !== uploadModes[mode].type) {
-      setFileName(null);
-      setDescription("");
-      pendingFile.current = null;
-    }
   };
 
   const openFilePicker = () => {
