@@ -59,12 +59,16 @@ export function DiagnosisFlow() {
   const [step, setStep] = useState(-1);
   const [running, setRunning] = useState(false);
   const [dragging, setDragging] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
+  // per-mode file storage: { 0: File, 1: File, 3: File }
+  const [modeFiles, setModeFiles] = useState<Record<number, File | null>>({});
   const [description, setDescription] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pipeline, setPipeline] = useState(defaultPipeline);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const pendingFile = useRef<File | null>(null);
+
+  // current mode's file
+  const currentFile = modeFiles[mode] ?? null;
 
   const runDiagnosis = () => {
     if (running) return;
@@ -141,8 +145,8 @@ export function DiagnosisFlow() {
       setError(`File too large. Max ${MAX_MB} MB allowed.`);
       return;
     }
-    setFileName(file.name);
-    // Use real ML for Machine photo mode (mode 0), demo for others
+    setModeFiles(prev => ({ ...prev, [mode]: file }));
+    pendingFile.current = file;
     if (mode === 0) {
       runRealDiagnosis(file);
     } else {
@@ -158,7 +162,7 @@ export function DiagnosisFlow() {
         setError(`File too large. Max ${MAX_MB} MB allowed.`);
       } else {
         pendingFile.current = file;
-        setFileName(file.name);
+        setModeFiles(prev => ({ ...prev, [mode]: file }));
       }
     }
     e.target.value = "";
@@ -174,14 +178,14 @@ export function DiagnosisFlow() {
         setError(`File too large. Max ${MAX_MB} MB allowed.`);
       } else {
         pendingFile.current = file;
-        setFileName(file.name);
+        setModeFiles(prev => ({ ...prev, [mode]: file }));
       }
     }
   };
 
   const resetDiagnosis = () => {
     setStep(-1);
-    setFileName(null);
+    setModeFiles({});
     setDescription("");
     setRunning(false);
     setError(null);
@@ -191,6 +195,8 @@ export function DiagnosisFlow() {
   const handleModeSelect = (i: number) => {
     if (i === mode) return;
     setMode(i);
+    // restore this mode's pending file
+    pendingFile.current = modeFiles[i] ?? null;
   };
 
   const openFilePicker = () => {
@@ -229,16 +235,22 @@ export function DiagnosisFlow() {
               type="button"
               title={m.hint}
               onClick={() => handleModeSelect(i)}
-              className={`rounded-xl border p-3 text-left transition-all ${
+              className={`relative rounded-xl border p-3 text-left transition-all ${
                 mode === i
                   ? "border-primary/50 bg-accent text-accent-foreground"
                   : "border-border bg-card hover:-translate-y-0.5"
               }`}
             >
+              {/* green dot if file attached for this mode */}
+              {m.type === "file" && modeFiles[i] && (
+                <span className="absolute top-2 right-2 size-2 rounded-full bg-green-500" />
+              )}
               <m.icon className="size-4.5" />
               <p className="mt-2 text-xs font-semibold leading-tight">{m.label}</p>
               {mode === i && (
-                <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{m.hint}</p>
+                <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">
+                  {m.type === "file" && modeFiles[i] ? modeFiles[i]!.name : m.hint}
+                </p>
               )}
             </button>
           ))}
@@ -314,9 +326,16 @@ export function DiagnosisFlow() {
             <div className="flex flex-col items-center">
               {(() => { const ModeIcon = uploadModes[mode].icon; return <ModeIcon className="size-7 text-primary" />; })()}
               <p className="mt-2 text-sm font-semibold">
-                {fileName ? `📎 ${fileName}` : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
+                {currentFile ? `📎 ${currentFile.name}` : `Drag & drop your ${uploadModes[mode].label.toLowerCase()}`}
               </p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
+              {currentFile && (
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {(currentFile.size / 1024).toFixed(1)} KB · {currentFile.type || "file"}
+                </p>
+              )}
+              {!currentFile && (
+                <p className="mt-0.5 text-xs text-muted-foreground">{uploadModes[mode].hint}</p>
+              )}
             </div>
 
             {error && (
@@ -338,10 +357,9 @@ export function DiagnosisFlow() {
               {/* Run button — only active after file is selected */}
               <button
                 type="button"
-                disabled={running || !fileName}
+                disabled={running || !currentFile}
                 onClick={() => {
-                  // Re-use stored file ref for diagnosis
-                  if (pendingFile.current) validateAndRun(pendingFile.current);
+                  if (currentFile) validateAndRun(currentFile);
                 }}
                 className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
               >
