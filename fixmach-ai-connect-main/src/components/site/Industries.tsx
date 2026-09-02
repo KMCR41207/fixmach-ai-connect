@@ -27,10 +27,11 @@ const industries = [
 
 export function Industries() {
   return (
-    <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5" role="list">
       {industries.map((i) => (
         <article
           key={i.name}
+          role="listitem"
           className="surface-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-glow)]"
         >
           <span className="flex size-10 items-center justify-center rounded-xl bg-accent text-accent-foreground">
