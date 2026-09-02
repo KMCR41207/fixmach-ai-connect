@@ -16,11 +16,11 @@ const industries = [
 ];
 
 const links = [
-  { label: "Solutions", href: "#ai-diagnosis" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Resources", href: "#faq" },
-  { label: "Case Studies", href: "#testimonials" },
-  { label: "Support", href: "#faq" },
+  { label: "Solutions", href: "/ai-diagnosis" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Resources", href: "/documentation" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Support", href: "/support" },
 ];
 
 export function Navbar() {
@@ -69,24 +69,9 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a
-            href="#technicians"
-            className="rounded-xl px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-          >
-            Sign in
-          </a>
-          <a
-            href="#book"
-            className="rounded-xl border border-border px-3.5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
-          >
-            Schedule Demo
-          </a>
-          <a
-            href="#book"
-            className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
-          >
-            Book Repair
-          </a>
+          <a href="/sign-in" className="rounded-xl px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary">Sign in</a>
+          <a href="/book-repair" className="rounded-xl border border-border px-3.5 py-2 text-sm font-semibold transition-colors hover:bg-secondary">Schedule Demo</a>
+          <a href="/book-repair" className="rounded-xl bg-[image:var(--gradient-accent)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5">Book Repair</a>
         </div>
 
         <button
@@ -126,13 +111,14 @@ export function Navbar() {
 
       {open && (
         <div className="mx-auto mt-2 w-[min(1200px,94%)] rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] lg:hidden">
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {[{ label: "Industries", href: "#industries" }, ...links].map((l) => (
               <a
                 key={l.label}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                aria-current={undefined}
               >
                 {l.label}
               </a>
