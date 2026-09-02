@@ -239,6 +239,14 @@
 @utility animate-scan-y { animation: scan-y 7s ease-in-out infinite; }
 @utility animate-drift { animation: drift 11s linear infinite; }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @utility blueprint-grid {
   background-image:
     linear-gradient(to right, oklch(1 0 0 / 0.07) 1px, transparent 1px),
