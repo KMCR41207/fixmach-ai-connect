@@ -50,21 +50,23 @@ export const Route = createFileRoute("/")({
           "AI diagnostics plus verified industrial technicians on demand for CNC, hydraulic, packaging and robotic machinery.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://primeflexmain.vercel.app" },
+      { property: "og:image", content: "https://primeflexmain.vercel.app/favicon.ico" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "FixMach AI — Industrial Machine Repair in Minutes" },
+      { name: "twitter:description", content: "AI diagnostics plus verified industrial technicians on demand for CNC, hydraulic, packaging and robotic machinery." },
     ],
   }),
   component: Landing,
 });
 
 const stats = [
-  { value: 28500, suffix: "+", label: "Verified technicians" },
+  { value: 29000, suffix: "+", label: "Verified technicians" },
   { value: 150, suffix: "+", label: "Machine categories" },
   { value: 8, suffix: " min", label: "Average response time" },
   { value: 99.3, suffix: "%", decimals: 1, label: "Repair success" },
-  { value: 12, prefix: "₹", suffix: "Cr+", label: "Downtime saved" },
+  { value: 14, prefix: "₹", suffix: "Cr+", label: "Downtime saved" },
 ];
-
-const urgency = [
   { icon: Clock, label: "Average response time", value: "8 Minutes" },
   { icon: Wrench, label: "Average repair completion", value: "4.3 Hours" },
   { icon: Siren, label: "Emergency dispatch", value: "24/7" },
@@ -462,6 +464,7 @@ function Landing() {
 
       <a
         href="#book"
+        aria-label="Book a repair"
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-2xl bg-[image:var(--gradient-ember)] px-5 py-3 text-sm font-semibold text-ember-foreground shadow-[var(--shadow-glow)] animate-pulse-ring transition-transform hover:-translate-y-0.5"
       >
         <Wrench className="size-4" /> Book Repair
