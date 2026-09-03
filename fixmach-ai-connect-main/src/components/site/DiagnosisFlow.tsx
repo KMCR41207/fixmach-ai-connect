@@ -175,14 +175,14 @@ export function DiagnosisFlow() {
       }, 700);
 
     } catch (err) {
-      // Backend offline — run convincing demo instead of showing error
+      // Backend offline — run a clearly-labelled demo so the user knows results are simulated
       const demoPipeline = defaultPipeline.map((p, idx) => {
-        if (idx === 0) return { ...p, detail: `${file.name} analysed` };
-        if (idx === 1) return { ...p, detail: "Surface texture and wear patterns scanned" };
-        if (idx === 2) return { ...p, detail: "Surface defect detected · wear pattern identified" };
-        if (idx === 3) return { ...p, detail: "94% — cross-checked on 51,000 similar faults" };
-        if (idx === 4) return { ...p, detail: "₹24,000 – ₹48,000 incl. parts" };
-        if (idx === 5) return { ...p, detail: "Inspect component surface · replace if wear exceeds 0.3mm" };
+        if (idx === 0) return { ...p, detail: `${file.name} analysed (demo mode)` };
+        if (idx === 1) return { ...p, detail: "⚠️ Demo — backend offline, results are simulated" };
+        if (idx === 2) return { ...p, detail: "Surface defect detected · wear pattern identified (demo)" };
+        if (idx === 3) return { ...p, detail: "94% — demo confidence score only" };
+        if (idx === 4) return { ...p, detail: "₹24,000 – ₹48,000 incl. parts (demo estimate)" };
+        if (idx === 5) return { ...p, detail: "Demo: Inspect component surface · replace if wear exceeds 0.3mm" };
         return p;
       });
       setPipeline(demoPipeline);
