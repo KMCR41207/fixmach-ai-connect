@@ -8,6 +8,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import tensorflow as tf
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("fixmach")
+
 app = FastAPI(title="Fixmach ML API")
 
 # Restrict CORS to known frontend origins only.
@@ -84,8 +90,10 @@ async def predict(file: UploadFile = File(...)):
         logger.warning("Rejected upload: Content-Type claimed image but magic bytes invalid")
         raise HTTPException(status_code=400, detail="File content does not match a supported image format")
 
+    logger.info("predict request | filename=%s size=%d content_type=%s", file.filename, len(image_bytes), file.content_type)
     arr = preprocess(image_bytes)
     pred = float(model.predict(arr, verbose=0)[0][0])
+    logger.info("prediction result | label=%s confidence=%.1f raw_score=%.4f", "OK" if pred > 0.5 else "DEFECTIVE", round(pred * 100 if pred > 0.5 else (1 - pred) * 100, 1), round(pred, 4))
 
     # class_names = ['defective', 'ok'] — index 0=defective, 1=ok
     # sigmoid output: closer to 1 = ok, closer to 0 = defective
