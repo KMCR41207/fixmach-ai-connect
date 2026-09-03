@@ -133,10 +133,13 @@ export function DiagnosisFlow() {
       await new Promise(r => setTimeout(r, 700));
       setStep(1);
 
-      const res = await fetch("http://localhost:8000/predict", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL ?? "http://localhost:8000"}/predict`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const data = await res.json();
