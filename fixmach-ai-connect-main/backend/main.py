@@ -1,7 +1,9 @@
 import io
+import logging
 import os
+import struct
 import numpy as np
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, Request, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import tensorflow as tf
@@ -34,7 +36,24 @@ model = tf.keras.models.load_model(MODEL_PATH)
 print("Model loaded.")
 
 
-def preprocess(image_bytes: bytes) -> np.ndarray:
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB hard limit
+
+# Known image magic bytes: (offset, signature)
+_IMAGE_SIGNATURES = [
+    (0, b"\xff\xd8\xff"),        # JPEG
+    (0, b"\x89PNG\r\n\x1a\n"),  # PNG
+    (0, b"GIF87a"),              # GIF87
+    (0, b"GIF89a"),              # GIF89
+    (0, b"RIFF"),                # WebP outer container (checked further below)
+    (0, b"BM"),                  # BMP
+]
+
+def _is_valid_image_bytes(data: bytes) -> bool:
+    """Return True only if data starts with a recognised image magic sequence."""
+    for offset, sig in _IMAGE_SIGNATURES:
+        if data[offset : offset + len(sig)] == sig:
+            return True
+    return False
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB").resize((128, 128))
     arr = np.array(img, dtype=np.float32)
     return np.expand_dims(arr, 0)
