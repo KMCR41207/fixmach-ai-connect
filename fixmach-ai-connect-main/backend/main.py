@@ -20,7 +20,14 @@ app.add_middleware(
     allow_headers=["Content-Type"],
 )
 
-MODEL_PATH = os.getenv("MODEL_PATH", r"C:\Users\qwert\Downloads\fixmach_mega_final.keras")
+# MODEL_PATH must be set via environment variable — no local path fallback.
+# On Render this is already configured in render.yaml.
+MODEL_PATH = os.getenv("MODEL_PATH")
+if not MODEL_PATH:
+    raise RuntimeError(
+        "MODEL_PATH environment variable is not set. "
+        "Set it to the absolute path of fixmach_mega_final.keras before starting the server."
+    )
 
 print("Loading model...")
 model = tf.keras.models.load_model(MODEL_PATH)
