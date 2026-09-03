@@ -66,10 +66,24 @@ def health():
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
+    # 1. Content-Type check (defence in depth — client-side header, not trusted alone)
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image")
 
     image_bytes = await file.read()
+
+    # 2. Server-side size guard
+    if len(image_bytes) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"File exceeds the {MAX_UPLOAD_BYTES // (1024 * 1024)} MB limit",
+        )
+
+    # 3. Magic-byte validation — rejects files whose Content-Type was spoofed
+    if not _is_valid_image_bytes(image_bytes):
+        logger.warning("Rejected upload: Content-Type claimed image but magic bytes invalid")
+        raise HTTPException(status_code=400, detail="File content does not match a supported image format")
+
     arr = preprocess(image_bytes)
     pred = float(model.predict(arr, verbose=0)[0][0])
 
