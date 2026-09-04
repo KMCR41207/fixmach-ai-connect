@@ -9,55 +9,549 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BookingRouteImport } from './routes/booking'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DiagnosisRouteImport } from './routes/diagnosis'
+import { Route as EmergencyRouteImport } from './routes/emergency'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as ForTechniciansRouteImport } from './routes/for-technicians'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as InventoryManagementRouteImport } from './routes/inventory-management'
+import { Route as InvoicesRouteImport } from './routes/invoices'
+import { Route as JobHistoryRouteImport } from './routes/job-history'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as MaintenanceScheduleRouteImport } from './routes/maintenance-schedule'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PricingPlansRouteImport } from './routes/pricing-plans'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ReferralProgramRouteImport } from './routes/referral-program'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as ServiceAreasRouteImport } from './routes/service-areas'
+import { Route as ServiceContractsRouteImport } from './routes/service-contracts'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
+import { Route as DashboardOwnerRouteImport } from './routes/dashboard/owner'
+import { Route as DashboardTechnicianRouteImport } from './routes/dashboard/technician'
+import { Route as MachineCategoryCategoryRouteImport } from './routes/machine-category.$category'
+import { Route as TechnicianIdRouteImport } from './routes/technician.$id'
+import { Route as TechnicianRegisterRouteImport } from './routes/technician/register'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosisRoute = DiagnosisRouteImport.update({
+  id: '/diagnosis',
+  path: '/diagnosis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyRoute = EmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedbackRoute = FeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForTechniciansRoute = ForTechniciansRouteImport.update({
+  id: '/for-technicians',
+  path: '/for-technicians',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryManagementRoute = InventoryManagementRouteImport.update({
+  id: '/inventory-management',
+  path: '/inventory-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoicesRoute = InvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobHistoryRoute = JobHistoryRouteImport.update({
+  id: '/job-history',
+  path: '/job-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaintenanceScheduleRoute = MaintenanceScheduleRouteImport.update({
+  id: '/maintenance-schedule',
+  path: '/maintenance-schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingPlansRoute = PricingPlansRouteImport.update({
+  id: '/pricing-plans',
+  path: '/pricing-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferralProgramRoute = ReferralProgramRouteImport.update({
+  id: '/referral-program',
+  path: '/referral-program',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceAreasRoute = ServiceAreasRouteImport.update({
+  id: '/service-areas',
+  path: '/service-areas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceContractsRoute = ServiceContractsRouteImport.update({
+  id: '/service-contracts',
+  path: '/service-contracts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminRoute = DashboardAdminRouteImport.update({
+  id: '/dashboard/admin',
+  path: '/dashboard/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardOwnerRoute = DashboardOwnerRouteImport.update({
+  id: '/dashboard/owner',
+  path: '/dashboard/owner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardTechnicianRoute = DashboardTechnicianRouteImport.update({
+  id: '/dashboard/technician',
+  path: '/dashboard/technician',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MachineCategoryCategoryRoute = MachineCategoryCategoryRouteImport.update({
+  id: '/machine-category/$category',
+  path: '/machine-category/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnicianIdRoute = TechnicianIdRouteImport.update({
+  id: '/technician/$id',
+  path: '/technician/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnicianRegisterRoute = TechnicianRegisterRouteImport.update({
+  id: '/technician/register',
+  path: '/technician/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
+  '/booking': typeof BookingRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
+  '/emergency': typeof EmergencyRoute
+  '/faq': typeof FaqRoute
+  '/feedback': typeof FeedbackRoute
+  '/for-technicians': typeof ForTechniciansRoute
+  '/help': typeof HelpRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/inventory-management': typeof InventoryManagementRoute
+  '/invoices': typeof InvoicesRoute
+  '/job-history': typeof JobHistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/maintenance-schedule': typeof MaintenanceScheduleRoute
+  '/notifications': typeof NotificationsRoute
+  '/partners': typeof PartnersRoute
+  '/pricing-plans': typeof PricingPlansRoute
+  '/privacy': typeof PrivacyRoute
+  '/referral-program': typeof ReferralProgramRoute
+  '/reviews': typeof ReviewsRoute
+  '/search': typeof SearchRoute
+  '/service-areas': typeof ServiceAreasRoute
+  '/service-contracts': typeof ServiceContractsRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/owner': typeof DashboardOwnerRoute
+  '/dashboard/technician': typeof DashboardTechnicianRoute
+  '/machine-category/$category': typeof MachineCategoryCategoryRoute
+  '/technician/$id': typeof TechnicianIdRoute
+  '/technician/register': typeof TechnicianRegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
+  '/booking': typeof BookingRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
+  '/emergency': typeof EmergencyRoute
+  '/faq': typeof FaqRoute
+  '/feedback': typeof FeedbackRoute
+  '/for-technicians': typeof ForTechniciansRoute
+  '/help': typeof HelpRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/inventory-management': typeof InventoryManagementRoute
+  '/invoices': typeof InvoicesRoute
+  '/job-history': typeof JobHistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/maintenance-schedule': typeof MaintenanceScheduleRoute
+  '/notifications': typeof NotificationsRoute
+  '/partners': typeof PartnersRoute
+  '/pricing-plans': typeof PricingPlansRoute
+  '/privacy': typeof PrivacyRoute
+  '/referral-program': typeof ReferralProgramRoute
+  '/reviews': typeof ReviewsRoute
+  '/search': typeof SearchRoute
+  '/service-areas': typeof ServiceAreasRoute
+  '/service-contracts': typeof ServiceContractsRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/owner': typeof DashboardOwnerRoute
+  '/dashboard/technician': typeof DashboardTechnicianRoute
+  '/machine-category/$category': typeof MachineCategoryCategoryRoute
+  '/technician/$id': typeof TechnicianIdRoute
+  '/technician/register': typeof TechnicianRegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
+  '/booking': typeof BookingRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
+  '/emergency': typeof EmergencyRoute
+  '/faq': typeof FaqRoute
+  '/feedback': typeof FeedbackRoute
+  '/for-technicians': typeof ForTechniciansRoute
+  '/help': typeof HelpRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/inventory-management': typeof InventoryManagementRoute
+  '/invoices': typeof InvoicesRoute
+  '/job-history': typeof JobHistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/maintenance-schedule': typeof MaintenanceScheduleRoute
+  '/notifications': typeof NotificationsRoute
+  '/partners': typeof PartnersRoute
+  '/pricing-plans': typeof PricingPlansRoute
+  '/privacy': typeof PrivacyRoute
+  '/referral-program': typeof ReferralProgramRoute
+  '/reviews': typeof ReviewsRoute
+  '/search': typeof SearchRoute
+  '/service-areas': typeof ServiceAreasRoute
+  '/service-contracts': typeof ServiceContractsRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/owner': typeof DashboardOwnerRoute
+  '/dashboard/technician': typeof DashboardTechnicianRoute
+  '/machine-category/$category': typeof MachineCategoryCategoryRoute
+  '/technician/$id': typeof TechnicianIdRoute
+  '/technician/register': typeof TechnicianRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/analytics'
+    | '/blog'
+    | '/booking'
+    | '/case-studies'
+    | '/checkout'
+    | '/contact'
+    | '/diagnosis'
+    | '/emergency'
+    | '/faq'
+    | '/feedback'
+    | '/for-technicians'
+    | '/help'
+    | '/how-it-works'
+    | '/inventory-management'
+    | '/invoices'
+    | '/job-history'
+    | '/leaderboard'
+    | '/maintenance-schedule'
+    | '/notifications'
+    | '/partners'
+    | '/pricing-plans'
+    | '/privacy'
+    | '/referral-program'
+    | '/reviews'
+    | '/search'
+    | '/service-areas'
+    | '/service-contracts'
+    | '/settings'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/auth/login'
+    | '/auth/register'
+    | '/dashboard/admin'
+    | '/dashboard/owner'
+    | '/dashboard/technician'
+    | '/machine-category/$category'
+    | '/technician/$id'
+    | '/technician/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/about'
+    | '/analytics'
+    | '/blog'
+    | '/booking'
+    | '/case-studies'
+    | '/checkout'
+    | '/contact'
+    | '/diagnosis'
+    | '/emergency'
+    | '/faq'
+    | '/feedback'
+    | '/for-technicians'
+    | '/help'
+    | '/how-it-works'
+    | '/inventory-management'
+    | '/invoices'
+    | '/job-history'
+    | '/leaderboard'
+    | '/maintenance-schedule'
+    | '/notifications'
+    | '/partners'
+    | '/pricing-plans'
+    | '/privacy'
+    | '/referral-program'
+    | '/reviews'
+    | '/search'
+    | '/service-areas'
+    | '/service-contracts'
+    | '/settings'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/auth/login'
+    | '/auth/register'
+    | '/dashboard/admin'
+    | '/dashboard/owner'
+    | '/dashboard/technician'
+    | '/machine-category/$category'
+    | '/technician/$id'
+    | '/technician/register'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/analytics'
+    | '/blog'
+    | '/booking'
+    | '/case-studies'
+    | '/checkout'
+    | '/contact'
+    | '/diagnosis'
+    | '/emergency'
+    | '/faq'
+    | '/feedback'
+    | '/for-technicians'
+    | '/help'
+    | '/how-it-works'
+    | '/inventory-management'
+    | '/invoices'
+    | '/job-history'
+    | '/leaderboard'
+    | '/maintenance-schedule'
+    | '/notifications'
+    | '/partners'
+    | '/pricing-plans'
+    | '/privacy'
+    | '/referral-program'
+    | '/reviews'
+    | '/search'
+    | '/service-areas'
+    | '/service-contracts'
+    | '/settings'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/auth/login'
+    | '/auth/register'
+    | '/dashboard/admin'
+    | '/dashboard/owner'
+    | '/dashboard/technician'
+    | '/machine-category/$category'
+    | '/technician/$id'
+    | '/technician/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  BlogRoute: typeof BlogRoute
+  BookingRoute: typeof BookingRoute
+  CaseStudiesRoute: typeof CaseStudiesRoute
+  CheckoutRoute: typeof CheckoutRoute
+  ContactRoute: typeof ContactRoute
+  DiagnosisRoute: typeof DiagnosisRoute
+  EmergencyRoute: typeof EmergencyRoute
+  FaqRoute: typeof FaqRoute
+  FeedbackRoute: typeof FeedbackRoute
+  ForTechniciansRoute: typeof ForTechniciansRoute
+  HelpRoute: typeof HelpRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  InventoryManagementRoute: typeof InventoryManagementRoute
+  InvoicesRoute: typeof InvoicesRoute
+  JobHistoryRoute: typeof JobHistoryRoute
+  LeaderboardRoute: typeof LeaderboardRoute
+  MaintenanceScheduleRoute: typeof MaintenanceScheduleRoute
+  NotificationsRoute: typeof NotificationsRoute
+  PartnersRoute: typeof PartnersRoute
+  PricingPlansRoute: typeof PricingPlansRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ReferralProgramRoute: typeof ReferralProgramRoute
+  ReviewsRoute: typeof ReviewsRoute
+  SearchRoute: typeof SearchRoute
+  ServiceAreasRoute: typeof ServiceAreasRoute
+  ServiceContractsRoute: typeof ServiceContractsRoute
+  SettingsRoute: typeof SettingsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+  DashboardAdminRoute: typeof DashboardAdminRoute
+  DashboardOwnerRoute: typeof DashboardOwnerRoute
+  DashboardTechnicianRoute: typeof DashboardTechnicianRoute
+  MachineCategoryCategoryRoute: typeof MachineCategoryCategoryRoute
+  TechnicianIdRoute: typeof TechnicianIdRoute
+  TechnicianRegisterRoute: typeof TechnicianRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +559,323 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnosis': {
+      id: '/diagnosis'
+      path: '/diagnosis'
+      fullPath: '/diagnosis'
+      preLoaderRoute: typeof DiagnosisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency': {
+      id: '/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof EmergencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feedback': {
+      id: '/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-technicians': {
+      id: '/for-technicians'
+      path: '/for-technicians'
+      fullPath: '/for-technicians'
+      preLoaderRoute: typeof ForTechniciansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory-management': {
+      id: '/inventory-management'
+      path: '/inventory-management'
+      fullPath: '/inventory-management'
+      preLoaderRoute: typeof InventoryManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoices': {
+      id: '/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof InvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/job-history': {
+      id: '/job-history'
+      path: '/job-history'
+      fullPath: '/job-history'
+      preLoaderRoute: typeof JobHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance-schedule': {
+      id: '/maintenance-schedule'
+      path: '/maintenance-schedule'
+      fullPath: '/maintenance-schedule'
+      preLoaderRoute: typeof MaintenanceScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing-plans': {
+      id: '/pricing-plans'
+      path: '/pricing-plans'
+      fullPath: '/pricing-plans'
+      preLoaderRoute: typeof PricingPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referral-program': {
+      id: '/referral-program'
+      path: '/referral-program'
+      fullPath: '/referral-program'
+      preLoaderRoute: typeof ReferralProgramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service-areas': {
+      id: '/service-areas'
+      path: '/service-areas'
+      fullPath: '/service-areas'
+      preLoaderRoute: typeof ServiceAreasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service-contracts': {
+      id: '/service-contracts'
+      path: '/service-contracts'
+      fullPath: '/service-contracts'
+      preLoaderRoute: typeof ServiceContractsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin': {
+      id: '/dashboard/admin'
+      path: '/dashboard/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof DashboardAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/owner': {
+      id: '/dashboard/owner'
+      path: '/dashboard/owner'
+      fullPath: '/dashboard/owner'
+      preLoaderRoute: typeof DashboardOwnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/technician': {
+      id: '/dashboard/technician'
+      path: '/dashboard/technician'
+      fullPath: '/dashboard/technician'
+      preLoaderRoute: typeof DashboardTechnicianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/machine-category/$category': {
+      id: '/machine-category/$category'
+      path: '/machine-category/$category'
+      fullPath: '/machine-category/$category'
+      preLoaderRoute: typeof MachineCategoryCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technician/$id': {
+      id: '/technician/$id'
+      path: '/technician/$id'
+      fullPath: '/technician/$id'
+      preLoaderRoute: typeof TechnicianIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technician/register': {
+      id: '/technician/register'
+      path: '/technician/register'
+      fullPath: '/technician/register'
+      preLoaderRoute: typeof TechnicianRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  BlogRoute: BlogRoute,
+  BookingRoute: BookingRoute,
+  CaseStudiesRoute: CaseStudiesRoute,
+  CheckoutRoute: CheckoutRoute,
+  ContactRoute: ContactRoute,
+  DiagnosisRoute: DiagnosisRoute,
+  EmergencyRoute: EmergencyRoute,
+  FaqRoute: FaqRoute,
+  FeedbackRoute: FeedbackRoute,
+  ForTechniciansRoute: ForTechniciansRoute,
+  HelpRoute: HelpRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  InventoryManagementRoute: InventoryManagementRoute,
+  InvoicesRoute: InvoicesRoute,
+  JobHistoryRoute: JobHistoryRoute,
+  LeaderboardRoute: LeaderboardRoute,
+  MaintenanceScheduleRoute: MaintenanceScheduleRoute,
+  NotificationsRoute: NotificationsRoute,
+  PartnersRoute: PartnersRoute,
+  PricingPlansRoute: PricingPlansRoute,
+  PrivacyRoute: PrivacyRoute,
+  ReferralProgramRoute: ReferralProgramRoute,
+  ReviewsRoute: ReviewsRoute,
+  SearchRoute: SearchRoute,
+  ServiceAreasRoute: ServiceAreasRoute,
+  ServiceContractsRoute: ServiceContractsRoute,
+  SettingsRoute: SettingsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+  DashboardAdminRoute: DashboardAdminRoute,
+  DashboardOwnerRoute: DashboardOwnerRoute,
+  DashboardTechnicianRoute: DashboardTechnicianRoute,
+  MachineCategoryCategoryRoute: MachineCategoryCategoryRoute,
+  TechnicianIdRoute: TechnicianIdRoute,
+  TechnicianRegisterRoute: TechnicianRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
