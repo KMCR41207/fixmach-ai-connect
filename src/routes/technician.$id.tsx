@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@antml/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Star, MapPin, Phone, MessageCircle, Video, Award } from "lucide-react";
 import { useState } from "react";
 
