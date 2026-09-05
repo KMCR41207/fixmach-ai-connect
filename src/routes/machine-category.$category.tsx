@@ -1,4 +1,4 @@
-import { createFileRoute, useSearch, useNavigate } from "@antml/react-router";
+import { createFileRoute, useSearch, useNavigate } from "@tanstack/react-router";
 import { MapPin, Clock, DollarSign, Users, BookOpen, Phone } from "lucide-react";
 import { useState } from "react";
 
