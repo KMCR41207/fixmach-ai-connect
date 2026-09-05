@@ -1,4 +1,4 @@
-import { createFileRoute } from "@antml/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Users, Building2, TrendingUp, AlertCircle, Settings } from "lucide-react";
 import { useState } from "react";
 
