@@ -22,3 +22,4 @@ Contribution tracker
 2026-09-16T11:24:00+00:00 | Improve diagnostics | minor revision 3
 2026-09-16T12:31:00+00:00 | Polish config | minor revision 4
 2026-09-16T09:38:00+00:00 | Polish config | minor revision 5
+2026-09-17T09:10:00+00:00 | Clean up helper | minor revision 1
