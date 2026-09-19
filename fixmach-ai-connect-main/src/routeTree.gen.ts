@@ -10,11 +10,111 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiDiagnosisRouteImport } from './routes/ai-diagnosis'
+import { Route as ApiRouteImport } from './routes/api'
+import { Route as BecomeTechnicianRouteImport } from './routes/become-technician'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BookRepairRouteImport } from './routes/book-repair'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as CertificationsRouteImport } from './routes/certifications'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DocumentationRouteImport } from './routes/documentation'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as LiveTrackingRouteImport } from './routes/live-tracking'
+import { Route as PayoutsRouteImport } from './routes/payouts'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SparePartsRouteImport } from './routes/spare-parts'
+import { Route as StatusRouteImport } from './routes/status'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as TermsRouteImport } from './routes/terms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiDiagnosisRoute = AiDiagnosisRouteImport.update({
+  id: '/ai-diagnosis',
+  path: '/ai-diagnosis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRoute = ApiRouteImport.update({
+  id: '/api',
+  path: '/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BecomeTechnicianRoute = BecomeTechnicianRouteImport.update({
+  id: '/become-technician',
+  path: '/become-technician',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRepairRoute = BookRepairRouteImport.update({
+  id: '/book-repair',
+  path: '/book-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificationsRoute = CertificationsRouteImport.update({
+  id: '/certifications',
+  path: '/certifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentationRoute = DocumentationRouteImport.update({
+  id: '/documentation',
+  path: '/documentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveTrackingRoute = LiveTrackingRouteImport.update({
+  id: '/live-tracking',
+  path: '/live-tracking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PayoutsRoute = PayoutsRouteImport.update({
+  id: '/payouts',
+  path: '/payouts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -22,31 +122,198 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SparePartsRoute = SparePartsRouteImport.update({
+  id: '/spare-parts',
+  path: '/spare-parts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-diagnosis': typeof AiDiagnosisRoute
+  '/api': typeof ApiRoute
+  '/become-technician': typeof BecomeTechnicianRoute
+  '/blog': typeof BlogRoute
+  '/book-repair': typeof BookRepairRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/documentation': typeof DocumentationRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/live-tracking': typeof LiveTrackingRoute
+  '/payouts': typeof PayoutsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spare-parts': typeof SparePartsRoute
+  '/status': typeof StatusRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-diagnosis': typeof AiDiagnosisRoute
+  '/api': typeof ApiRoute
+  '/become-technician': typeof BecomeTechnicianRoute
+  '/blog': typeof BlogRoute
+  '/book-repair': typeof BookRepairRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/documentation': typeof DocumentationRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/live-tracking': typeof LiveTrackingRoute
+  '/payouts': typeof PayoutsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spare-parts': typeof SparePartsRoute
+  '/status': typeof StatusRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-diagnosis': typeof AiDiagnosisRoute
+  '/api': typeof ApiRoute
+  '/become-technician': typeof BecomeTechnicianRoute
+  '/blog': typeof BlogRoute
+  '/book-repair': typeof BookRepairRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/documentation': typeof DocumentationRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/live-tracking': typeof LiveTrackingRoute
+  '/payouts': typeof PayoutsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spare-parts': typeof SparePartsRoute
+  '/status': typeof StatusRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ai-diagnosis'
+    | '/api'
+    | '/become-technician'
+    | '/blog'
+    | '/book-repair'
+    | '/careers'
+    | '/case-studies'
+    | '/certifications'
+    | '/contact'
+    | '/documentation'
+    | '/leaderboard'
+    | '/live-tracking'
+    | '/payouts'
+    | '/pricing'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/spare-parts'
+    | '/status'
+    | '/support'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/about'
+    | '/ai-diagnosis'
+    | '/api'
+    | '/become-technician'
+    | '/blog'
+    | '/book-repair'
+    | '/careers'
+    | '/case-studies'
+    | '/certifications'
+    | '/contact'
+    | '/documentation'
+    | '/leaderboard'
+    | '/live-tracking'
+    | '/payouts'
+    | '/pricing'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/spare-parts'
+    | '/status'
+    | '/support'
+    | '/terms'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/ai-diagnosis'
+    | '/api'
+    | '/become-technician'
+    | '/blog'
+    | '/book-repair'
+    | '/careers'
+    | '/case-studies'
+    | '/certifications'
+    | '/contact'
+    | '/documentation'
+    | '/leaderboard'
+    | '/live-tracking'
+    | '/payouts'
+    | '/pricing'
+    | '/privacy'
+    | '/sitemap.xml'
+    | '/spare-parts'
+    | '/status'
+    | '/support'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AiDiagnosisRoute: typeof AiDiagnosisRoute
+  ApiRoute: typeof ApiRoute
+  BecomeTechnicianRoute: typeof BecomeTechnicianRoute
+  BlogRoute: typeof BlogRoute
+  BookRepairRoute: typeof BookRepairRoute
+  CareersRoute: typeof CareersRoute
+  CaseStudiesRoute: typeof CaseStudiesRoute
+  CertificationsRoute: typeof CertificationsRoute
+  ContactRoute: typeof ContactRoute
+  DocumentationRoute: typeof DocumentationRoute
+  LeaderboardRoute: typeof LeaderboardRoute
+  LiveTrackingRoute: typeof LiveTrackingRoute
+  PayoutsRoute: typeof PayoutsRoute
+  PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SparePartsRoute: typeof SparePartsRoute
+  StatusRoute: typeof StatusRoute
+  SupportRoute: typeof SupportRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +325,118 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-diagnosis': {
+      id: '/ai-diagnosis'
+      path: '/ai-diagnosis'
+      fullPath: '/ai-diagnosis'
+      preLoaderRoute: typeof AiDiagnosisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api': {
+      id: '/api'
+      path: '/api'
+      fullPath: '/api'
+      preLoaderRoute: typeof ApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/become-technician': {
+      id: '/become-technician'
+      path: '/become-technician'
+      fullPath: '/become-technician'
+      preLoaderRoute: typeof BecomeTechnicianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-repair': {
+      id: '/book-repair'
+      path: '/book-repair'
+      fullPath: '/book-repair'
+      preLoaderRoute: typeof BookRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certifications': {
+      id: '/certifications'
+      path: '/certifications'
+      fullPath: '/certifications'
+      preLoaderRoute: typeof CertificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentation': {
+      id: '/documentation'
+      path: '/documentation'
+      fullPath: '/documentation'
+      preLoaderRoute: typeof DocumentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live-tracking': {
+      id: '/live-tracking'
+      path: '/live-tracking'
+      fullPath: '/live-tracking'
+      preLoaderRoute: typeof LiveTrackingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payouts': {
+      id: '/payouts'
+      path: '/payouts'
+      fullPath: '/payouts'
+      preLoaderRoute: typeof PayoutsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -65,12 +444,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spare-parts': {
+      id: '/spare-parts'
+      path: '/spare-parts'
+      fullPath: '/spare-parts'
+      preLoaderRoute: typeof SparePartsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AiDiagnosisRoute: AiDiagnosisRoute,
+  ApiRoute: ApiRoute,
+  BecomeTechnicianRoute: BecomeTechnicianRoute,
+  BlogRoute: BlogRoute,
+  BookRepairRoute: BookRepairRoute,
+  CareersRoute: CareersRoute,
+  CaseStudiesRoute: CaseStudiesRoute,
+  CertificationsRoute: CertificationsRoute,
+  ContactRoute: ContactRoute,
+  DocumentationRoute: DocumentationRoute,
+  LeaderboardRoute: LeaderboardRoute,
+  LiveTrackingRoute: LiveTrackingRoute,
+  PayoutsRoute: PayoutsRoute,
+  PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SparePartsRoute: SparePartsRoute,
+  StatusRoute: StatusRoute,
+  SupportRoute: SupportRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
