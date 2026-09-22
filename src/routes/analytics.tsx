@@ -1,13 +1,85 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TrendingUp, BarChart3, PieChart, Activity, AlertTriangle } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/analytics")({
   component: AnalyticsPage,
 });
 
+function buildContributionCalendar(startDate: Date, endDate: Date) {
+  const dayMs = 1000 * 60 * 60 * 24;
+  const mondayOffset = (startDate.getDay() + 6) % 7;
+  const calendarStart = new Date(startDate);
+  calendarStart.setDate(startDate.getDate() - mondayOffset);
+
+  const calendarEnd = new Date(endDate);
+  const totalDays = Math.ceil((calendarEnd.getTime() - calendarStart.getTime()) / dayMs) + 1;
+
+  const cells: Array<{ date: Date; count: number }> = [];
+
+  for (let i = 0; i < totalDays; i += 1) {
+    const date = new Date(calendarStart);
+    date.setDate(calendarStart.getDate() + i);
+
+    const isInRange = date >= startDate && date <= endDate;
+    const count = isInRange
+      ? Math.random() < 0.18
+        ? 0
+        : Math.min(6, Math.max(1, Math.round(3 + Math.random() * 3)))
+      : 0;
+
+    cells.push({ date, count });
+  }
+
+  const weeks: Array<Array<{ date: Date; count: number }>> = [];
+  for (let i = 0; i < cells.length; i += 7) {
+    weeks.push(cells.slice(i, i + 7));
+  }
+
+  const monthLabels: Array<{ name: string; offset: number }> = [];
+  const seen = new Set<string>();
+
+  weeks.forEach((week, weekIndex) => {
+    const firstDate = week[0]?.date;
+    if (!firstDate) return;
+
+    const label = firstDate.toLocaleDateString("en-US", { month: "short" });
+    const key = `${label}-${firstDate.getFullYear()}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      monthLabels.push({
+        name: label,
+        offset: weekIndex,
+      });
+    }
+  });
+
+  const totalContributions = cells.reduce((sum, cell) => sum + (cell.count > 0 ? cell.count : 0), 0);
+
+  return { weeks, monthLabels, totalContributions };
+}
+
+const dayNames = ["Mon", "Wed", "Fri"];
+
 function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState("30days");
+  const [hoveredDay, setHoveredDay] = useState<{ date: Date; count: number } | null>(null);
+
+  const contributionCalendar = useMemo(() => {
+    const startDate = new Date("2026-09-12T00:00:00");
+    const endDate = new Date();
+    return buildContributionCalendar(startDate, endDate);
+  }, []);
+
+  const contributionSummaryLabel = `from ${new Date("2026-09-12T00:00:00").toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  })} to ${new Date().toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  })}`;
 
   const metrics = [
     {
@@ -91,6 +163,146 @@ function AnalyticsPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mb-8 overflow-hidden rounded-[28px] border border-border bg-[#020b17] p-5 text-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <h2 className="text-[2rem] font-semibold tracking-[-0.04em] text-foreground">
+              {new Intl.NumberFormat("en-US").format(contributionCalendar.totalContributions)} contributions {contributionSummaryLabel}
+            </h2>
+            <div className="flex items-center gap-3">
+              <button className="inline-flex items-center gap-1 rounded-lg border border-border bg-secondary/30 px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary/40">
+                Contribution settings
+                <span className="text-xs">▼</span>
+              </button>
+              <button className="inline-flex h-12 min-w-24 items-center justify-center rounded-xl bg-[#1f6feb] px-4 text-base font-semibold text-white shadow-[0_16px_30px_rgba(31,111,235,0.32)]">
+                2026
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/80 bg-[#030f1d] p-4">
+            <div className="mb-3 flex items-center gap-4">
+              <div className="w-12 shrink-0" />
+              <div className="flex flex-1 items-center gap-2 text-xs text-muted-foreground">
+                {contributionCalendar.monthLabels.map((month) => (
+                  <div key={`${month.name}-${month.offset}`} className="h-4" style={{ marginLeft: `${month.offset * 14}px` }}>
+                    {month.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative flex gap-4">
+              <div className="flex w-12 flex-col justify-between pt-1 text-xs text-muted-foreground">
+                {dayNames.map((day) => (
+                  <span key={day} className="h-6" style={{ lineHeight: "24px" }}>
+                    {day}
+                  </span>
+                ))}
+              </div>
+
+              <div className="relative flex-1">
+                <div className="flex gap-[4px]">
+                  {contributionCalendar.weeks.map((week, weekIndex) => (
+                    <div key={`week-${weekIndex}`} className="flex flex-col gap-[4px]">
+                      {week.map((day, dayIndex) => {
+                        const isEmpty = day.count === 0;
+                        const isHovered = hoveredDay?.date.getTime() === day.date.getTime();
+                        const colorClass = isEmpty
+                          ? "bg-[#161b22]"
+                          : day.count <= 1
+                            ? "bg-[#0e4429]"
+                            : day.count <= 2
+                              ? "bg-[#006d32]"
+                              : day.count <= 3
+                                ? "bg-[#26a641]"
+                                : day.count <= 4
+                                  ? "bg-[#39d353]"
+                                  : "bg-[#56d364]";
+
+                        return (
+                          <button
+                            key={`${day.date.toISOString()}-${dayIndex}`}
+                            type="button"
+                            aria-label={
+                              day.count === 0
+                                ? `No contributions on ${day.date.toLocaleDateString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}`
+                                : `${day.count} contributions on ${day.date.toLocaleDateString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}`
+                            }
+                            onMouseEnter={() => setHoveredDay(day)}
+                            onMouseLeave={() => setHoveredDay(null)}
+                            className={`h-3.5 w-3.5 rounded-[3px] border border-white/5 transition-all duration-150 ${colorClass} ${isHovered ? "ring-2 ring-primary/70" : ""}`}
+                            title={
+                              day.count === 0
+                                ? `No contributions on ${day.date.toLocaleDateString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                  })}.`
+                                : `${day.count} contributions on ${day.date.toLocaleDateString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                  })}.`
+                            }
+                          />
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+
+                {hoveredDay && (
+                  <div className="pointer-events-none absolute left-1/2 top-12 -translate-x-1/2 rounded-xl border border-border/60 bg-[#f6f8fa] px-3 py-2 text-sm font-medium text-slate-900 shadow-lg">
+                    {hoveredDay.count === 0
+                      ? `No contributions on ${hoveredDay.date.toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                        })}.`
+                      : `${hoveredDay.count} contributions on ${hoveredDay.date.toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                        })}.`}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-center justify-between text-sm text-muted-foreground">
+              <span className="text-muted-foreground/80">Learn how we count contributions</span>
+              <div className="flex items-center gap-2">
+                <span>Less</span>
+                <div className="flex items-center gap-1">
+                  {[0, 1, 2, 3, 4, 5].map((level) => (
+                    <span
+                      key={level}
+                      className={`h-3 w-3 rounded-[2px] ${
+                        level === 0
+                          ? "bg-[#161b22]"
+                          : level === 1
+                            ? "bg-[#0e4429]"
+                            : level === 2
+                              ? "bg-[#006d32]"
+                              : level === 3
+                                ? "bg-[#26a641]"
+                                : level === 4
+                                  ? "bg-[#39d353]"
+                                  : "bg-[#56d364]"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span>More</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
